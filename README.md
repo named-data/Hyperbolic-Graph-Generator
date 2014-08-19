@@ -1,41 +1,34 @@
-Hyperbolic-Graph-Generator
-==========================
+# Hyperbolic-Graph-Generator
+
 
 A set of tools to generate synthetic graphs embedded into a hyperbolic space and to test the greedy routing.
 
 
-	      ====== Hyperbolic Graph Generator ====== 
-
-
-== Installation:
+## Installation:
 
 
 Requirements:
-	- boost libraries 1.46.1 or higher
-	- gsl libraries 1.16 or higher
-	- libtool 
+- *boost libraries 1.46.1* or higher
+- *gsl libraries 1.16* or higher
+- *libtool* 
 
-In order to install the Hyperbolic Graph Generator you need to follow
-the list of instructions below:
-
-	./configure
-	make
-	(sudo) make install
-
+In order to install the Hyperbolic Graph Generator you need to follow the list of instructions below:
+```sh
+$ ./configure
+$ make
+$ (sudo) make install
+```
 The procedure above builds three tools:
+- *hyperbolic_graph_generator*
+- *graph_properties*
+- *greedy_routing*
 
-	- hyperbolic_graph_generator
-	- graph_properties
-	- greedy_routing
+also, it installs the *hggraphs library* (public interface is described in *hg_graphs_lib.h*). 
+For more information about the installation process, please see the Installation FAQs.
 
-also, it installs the hggraphs library (public interface is described
-in hg_graphs_lib.h). 
-For more information, please see the Installation FAQs.
+## Description:
 
-
-== Description:
-
-=== hyperbolic_graph_generator
+### hyperbolic_graph_generator
 
 A tool to generate synthetic graphs embedded into a hyperbolic space.
 
