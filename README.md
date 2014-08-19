@@ -150,28 +150,28 @@ OPTIONS:
 
 **Q**: Where are the executables?
 
-**A**: By default, make install installs the package's commands under
-   `/usr/local/bin', include files under `/usr/local/include', etc.
-   You can specify an installation prefix other than `/usr/local' by
-   giving `configure' the option `--prefix=PREFIX', where PREFIX must
-   be an absolute file name.
+**A**: By default, `make install` installs the package's commands under
+   `/usr/local/bin`, copies the header files under `/usr/local/include`, 
+   while the compiled libraries are available at `/usr/local/lib`. 
+   You can specify an installation prefix other than `/usr/local` by
+   giving `configure` the option `--prefix=PREFIX`, where PREFIX must
+   be an absolute path.
 
 
 **Q**: Can I install the Hyperbolic Graph Generator in my HOME directory?
-**A**: Yes, all you need is to run configure using the --prefix option:
+**A**: Yes, all you need is to run `configure` using the `--prefix` option:
+	```
    	./configure --prefix=/home/user/my_hg_generator
-
-   Tools will be available in:
-	/home/user/my_hg_generator/bin
-   Library files will be available in:
-	/home/user/my_hg_generator/include
-	/home/user/my_hg_generator/lib
+	```
+Tools will be available in:
+	`/home/user/my_hg_generator/bin`
+Library files will be available in:
+	`/home/user/my_hg_generator/include`
+	`/home/user/my_hg_generator/lib`
 
 
 **Q**: boost libraries are not found, how can I fix this problem?
-**A**: if boost libraries are not installed, then
-   install them using your package management system
-   or:
+**A**: if boost libraries are not installed, then install them using your package management system, or:
    1) download them at http://www.boost.org/
    2) extract boost_**.tar.bz2 in a convenient location e.g. /home/user/
    Then run again the configure command in the Hyperbolic Graph Generator
