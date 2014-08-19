@@ -159,18 +159,25 @@ OPTIONS:
 
 
 **Q**: Can I install the Hyperbolic Graph Generator in my HOME directory?
+
 **A**: Yes, all you need is to run `configure` using the `--prefix` option:
 	```
    	./configure --prefix=/home/user/my_hg_generator
 	```
+
 Tools will be available in:
+
 	`/home/user/my_hg_generator/bin`
+
 Library files will be available in:
+
 	`/home/user/my_hg_generator/include`
+
 	`/home/user/my_hg_generator/lib`
 
 
 **Q**: boost libraries are not found, how can I fix this problem?
+
 **A**: if boost libraries are not installed, then install them using your package management system, or:
    1) download them at http://www.boost.org/
    2) extract boost_**.tar.bz2 in a convenient location e.g. /home/user/
@@ -184,6 +191,7 @@ Library files will be available in:
 
 
 **Q**: gsl libraries are not found, how can I fix this problem
+
 **A**: if gsl libraries are not installed, then
    install them using your package management system
    or follow the instructions at:
@@ -193,19 +201,20 @@ Library files will be available in:
    a standard path ..."
 
 
-**Q**: My boost libraries are not installed in a standard path, how
-   can I install the Hyperbolic Graph Generator?
+**Q**: My boost libraries are not installed in a standard path, how can I install the Hyperbolic Graph Generator?
+
 **A**: If the boost libraries are installed in a custom path, e.g. 
    they are in /home/user/myboost, then the configure command
    must be run with the CPPFLAGS set:
 
-	./configure CPPFLAGS='-I/home/user/myboost'
+	```./configure CPPFLAGS='-I/home/user/myboost'``
 
    Boost are header-only libraries, then no LDFLAGS are required
 
 
 **Q**: My gsl libraries are not installed in a standard path, how
    can I install the Hyperbolic Graph Generator?
+   
 **A**: If the gsl libraries are installed in a custom path, e.g. 
    they are in /home/user/mygsl, then the configure command
    must be run with both the CPPFLAGS and LDFLAGS set:
@@ -219,8 +228,8 @@ Library files will be available in:
      -L/opt/local/lib -lgsl -lgslcblas
 
 
-**Q**: Both boost and gsl libraries are installed in non standard paths, how
-   can I install the Hyperbolic Graph Generator?
+**Q**: Both boost and gsl libraries are installed in non standard paths, how can I install the Hyperbolic Graph Generator?
+   
 **A**: A combination of the previous answers can be used:
 
    ./configure CPPFLAGS='-I/home/user/myboost -I/home/user/mygsl/include' LDFLAGS="-L/home/user/mygsl/lib"
@@ -228,6 +237,7 @@ Library files will be available in:
 
 
 **Q**: Can I use the hggraphs library to develop new tools?
+
 **A**: Yes, the public interface is described in the hg_graphs_lib.h file
    that is installed in include/hg_graphs_lib.h. In order to link the 
    library to your tool you need to provide the -lhggraphs option as well
