@@ -1,11 +1,8 @@
-# Hyperbolic-Graph-Generator
-
+## Hyperbolic-Graph-Generator
 
 A set of tools to generate synthetic graphs embedded into a hyperbolic space and to test the greedy routing.
 
-
-## Installation:
-
+### Installation:
 
 Requirements:
 - *boost libraries 1.46.1* or higher
@@ -23,12 +20,11 @@ The procedure above builds three tools:
 - *graph_properties*
 - *greedy_routing*
 
-also, it installs the *hggraphs library* (public interface is described in *hg_graphs_lib.h*). 
-For more information about the installation process, please see the Installation FAQs.
+Also, it installs the *hggraphs library* (public interface is described in *hg_graphs_lib.h*). For more information about the installation process, please see the Installation FAQs.
 
-## Description:
+### Description:
 
-### hyperbolic_graph_generator
+#### **hyperbolic_graph_generator**
 
 A tool to generate synthetic graphs embedded into a hyperbolic space.
 
@@ -43,7 +39,7 @@ DESCRIPTION:
 	The program generates random hyperbolic graphs according to
 	http://dx.doi.org/10.1103/PhysRevE.82.036106
 	A brief description of how the hyperbolic graph generator
-	code works can be found in Hyperbolic_Graph_Generation.pdf
+	code works can be found in Hyperbolic_Graph_Generation.pdf.
 
 OPTIONS:
 	-n	graph size (number of nodes)
@@ -55,24 +51,23 @@ OPTIONS:
 	-t	temperature
 		default value is 0 (infinite temperature = 10)
 	-z	square root of curvature zeta=sqrt(-K)
+	    or ratio eta=zeta/T in Soft Configuration Model
 		default value is 1
 	-s	random seed
 		default value is 1
 	-o	output folder
 		default value is current folder
 	-h	print help menu
-	-v	verbose mode on
-
+	-q	quiet (no output)
 
 OUTPUT FORMAT:
-	
-	The program outputs a graph using the following order:
-	the first line describes the main graph parameters:
-		N <num nodes> T <tempearature> G <gamma> K <avg.degree> Z <zeta> S <seed> I <initial_node_id>
-	the following <num nodes> lines associate a polar coordinate
+	The program outputs a graph using the following format.
+	The first line describes the main graph parameters:
+	N <num nodes> T <tempearature> G <gamma> K <avg.degree> Z <zeta> S <seed> I <initial_node_id>
+	The following <num nodes> lines associate a polar coordinate
 	to each node of the graph:
 		node_id		radial coordinate	angular coordinate
-	Finally, the links are listed
+	Finally, the links are listed:
 		node_id  node_id
 
 	Example:
@@ -91,10 +86,9 @@ OUTPUT FORMAT:
 	98	99
 ```
 
-### graph_properties
 
-
-A tool to compute some basic graph properties of the generated hyperbolic graphs
+#### **graph_properties**
+A tool to compute some basic graph properties of the generated hyperbolic graphs.
 
 ```
 NAME: 
@@ -117,20 +111,22 @@ OPTIONS:
 	-o	output folder
 		default value is current folder
 	-h	print help menu
+    -q	quiet (no output)
 ```
 
 
 ### greedy_routing
+A tool to test the greedy routing on hyperbolic graphs.
 
 ```
 NAME: 
-	greedy_routing - greedy routing success ratio computation 
+	greedy_routing - greedy routing success ratio computation. 
 
 SYNOPSIS: 
 	greedy_routing [options] [args] 
 
 DESCRIPTION:
-	Greedy routing performace test: it computes the greedy routing
+	Greedy routing performance test: it computes the greedy routing
 	success ratio taking into account [a] (default 10000) random pairs
 	belonging to the same connected component.
 
@@ -144,23 +140,15 @@ OPTIONS:
 	-h	print help menu
 ```
 
+###  Installation FAQs:
+
+**Where are the executables?**
+By default, `make install` installs the package's commands under  `/usr/local/bin`, copies the header files under `/usr/local/include`, while the compiled libraries are available at `/usr/local/lib`. 
+You can specify an installation prefix other than `/usr/local` by giving `configure` the option `--prefix=PREFIX`, where PREFIX must be an absolute path.
 
 
-##Installation FAQs:
-
-**Q**: Where are the executables?
-
-**A**: By default, `make install` installs the package's commands under
-   `/usr/local/bin`, copies the header files under `/usr/local/include`, 
-   while the compiled libraries are available at `/usr/local/lib`. 
-   You can specify an installation prefix other than `/usr/local` by
-   giving `configure` the option `--prefix=PREFIX`, where PREFIX must
-   be an absolute path.
-
-
-**Q**: Can I install the Hyperbolic Graph Generator in my HOME directory?
-
-**A**: Yes, all you need is to run `configure` using the `--prefix` option:
+**Can I install the Hyperbolic Graph Generator in my HOME directory?**
+Yes, all you need is to run `configure` using the `--prefix` option:
 	```
    	./configure --prefix=/home/user/my_hg_generator
 	```
@@ -176,9 +164,8 @@ Library files will be available in:
 	`/home/user/my_hg_generator/lib`
 
 
-**Q**: boost libraries are not found, how can I fix this problem?
-
-**A**: if boost libraries are not installed, then install them using your package management system, or:
+**The boost libraries are not found, how can I fix this problem?**
+If the boost libraries are not installed, then install them using your package management system, or:
    1) download them at http://www.boost.org/
    2) extract boost_**.tar.bz2 in a convenient location e.g. /home/user/
    Then run again the configure command in the Hyperbolic Graph Generator
@@ -186,71 +173,44 @@ Library files will be available in:
 
         ./configure CPPFLAGS='-I/home/user/myboost'
 
-   Note: boost are header-only libraries, no installation
-	 process is required
+   Note: boost are header-only libraries, no installation process is required
 
 
-**Q**: gsl libraries are not found, how can I fix this problem
-
-**A**: if gsl libraries are not installed, then
-   install them using your package management system
-   or follow the instructions at:
-	http://www.gnu.org/software/gsl/
-   if gsl libraries are installed in custom location 
-   then read Q "My gsl libraries are not installed in
-   a standard path ..."
+**The gsl libraries are not found, how can I fix this problem**
+If the gsl libraries are not installed, then install them using your package management system or follow the instructions at http://www.gnu.org/software/gsl/.
 
 
-**Q**: My boost libraries are not installed in a standard path, how can I install the Hyperbolic Graph Generator?
+**My boost libraries are not installed in a standard path, how can I build the Hyperbolic Graph Generator?**
+If the boost libraries are installed in a custom path, e.g. they are in `/home/user/myboost`, then the configure command must be run with the CPPFLAGS set:
 
-**A**: If the boost libraries are installed in a custom path, e.g. 
-   they are in /home/user/myboost, then the configure command
-   must be run with the CPPFLAGS set:
+	./configure CPPFLAGS='-I/home/user/myboost'
 
-	```./configure CPPFLAGS='-I/home/user/myboost'``
-
-   Boost are header-only libraries, then no LDFLAGS are required
+Boost are header-only libraries, then no LDFLAGS are required.
 
 
-**Q**: My gsl libraries are not installed in a standard path, how
-   can I install the Hyperbolic Graph Generator?
-   
-**A**: If the gsl libraries are installed in a custom path, e.g. 
-   they are in /home/user/mygsl, then the configure command
-   must be run with both the CPPFLAGS and LDFLAGS set:
+**My gsl libraries are not installed in a standard path, how can I install the Hyperbolic Graph Generator?**
+If the gsl libraries are installed in a custom path, e.g.  they are in `/home/user/mygsl`, then the configure command must be run with both the CPPFLAGS and LDFLAGS set:
 
 	./configure CPPFLAGS='-I/home/user/mygsl/include' LDFLAGS="-L/home/user/mygsl/lib"
    
-   If gsl are installed, the following command return the information
-   be put in the CPPFLAGS and LDFLAGS:
+If gsl are installed, the following command return the information to be put in the CPPFLAGS and LDFLAGS:
+    ```
    $ gsl-config --cflags --libs
-     -I/opt/local/include
-     -L/opt/local/lib -lgsl -lgslcblas
+      -I/opt/local/include
+      -L/opt/local/lib -lgsl -lgslcblas
+    ```
 
-
-**Q**: Both boost and gsl libraries are installed in non standard paths, how can I install the Hyperbolic Graph Generator?
-   
-**A**: A combination of the previous answers can be used:
+**Both boost and gsl libraries are installed in non standard paths, how can I install the Hyperbolic Graph Generator?**
+A combination of the previous answers can be used.
 
    ./configure CPPFLAGS='-I/home/user/myboost -I/home/user/mygsl/include' LDFLAGS="-L/home/user/mygsl/lib"
 
 
 
-**Q**: Can I use the hggraphs library to develop new tools?
-
-**A**: Yes, the public interface is described in the hg_graphs_lib.h file
-   that is installed in include/hg_graphs_lib.h. In order to link the 
-   library to your tool you need to provide the -lhggraphs option as well
-   as the path to the lib folder containing the library at linking time.
-   e.g.
-	Hyperbolic Graph Generator installed in default path:
+**Can I use the hggraphs library to develop new tools?**
+The libhggraphs public interface is described in the hg_graphs_lib.h file that is installed in `include/hg_graphs_lib.h`. In order to link the library to your tool you need to provide the -lhggraphs option as well as the path to the lib folder containing the library at linking time.
+Let's suppose that the Hyperbolic Graph Generator installed in the default path `/usr/local`, in order to build a new tool the following operations have to be performed:
 
 	g++ -I/usr/local/include -c my_new_tool.o my_new_tool.cpp
 	g++ -o my_new_tool my_new_tool.o -L/usr/local/lib -lhggraphs
-
-	Hyperbolic Graph Generator installed in custom path:
-
-	g++ -I/home/user/my_hg_generator/include -c my_new_tool.o my_new_tool.cpp
-	g++ -o my_new_tool my_new_tool.o -L/home/user/my_hg_generator/lib -lhggraphs
-
 
