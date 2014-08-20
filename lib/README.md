@@ -18,7 +18,6 @@ $ (sudo) make install
 ```
 The procedure above builds and install the hggraphs library (public interface is described in hg_graphs_lib.h). For more information, please see the Installation FAQs.
 
-```
 
 ###  Installation FAQs:
 
