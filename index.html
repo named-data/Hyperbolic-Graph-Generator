@@ -4,7 +4,7 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Hyperbolic-graph-generator : A set of tools to generate synthetic graphs embedded into a hyperbolic space and to test the greedy routing.">
+    <meta name="description" content="Hyperbolic-graph-generator : A tools to generate synthetic graphs embedded into a hyperbolic space.">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -19,7 +19,7 @@
           <a id="forkme_banner" href="https://github.com/chiaraorsini/Hyperbolic-Graph-Generator">View on GitHub</a>
 
           <h1 id="project_title">Hyperbolic-graph-generator</h1>
-          <h2 id="project_tagline">A set of tools to generate synthetic graphs embedded into a hyperbolic space and to test the greedy routing.</h2>
+          <h2 id="project_tagline">A tools to generate synthetic graphs embedded into a hyperbolic space.</h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/chiaraorsini/Hyperbolic-Graph-Generator/zipball/master">Download this project as a .zip file</a>
@@ -36,7 +36,28 @@
 
 <p>This software implements and extends the network model described in <a href="http://arxiv.org/abs/1006.5169">Hyperbolic Geometry of Complex Networks</a>. Embedded in the hyperbolic plane, these networks naturally exhibit two common properties of real-world networks, namely power-law node degree distribution and strong clustering. Moreover, other well-known graph ensembles, such as the soft configuration model (SCM), Erdos-Renyi (ER) graphs, or random geometric graphs (RGGs), appear as degenerate regimes in the model. </p>
 
-<p>-&gt; insert table here</p>
+<table>
+<thead><tr>
+<th></th>
+<th>T = 0</th>
+<th>T in (0,inf)</th>
+<th>infinite T</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>gamma in [2,inf)</td>
+<td>Hyperbolic RGG</td>
+<td>Soft Hyperbolic RGG</td>
+<td>Soft Configuration Model</td>
+</tr>
+<tr>
+<td>infinite gamma</td>
+<td>Spherical RGG</td>
+<td>Soft Spherical RGG</td>
+<td>Erdos-Renyi</td>
+</tr>
+</tbody>
+</table><p>The user selects a regime by specifying appropriate values of γ and T. If <strong>γ &gt;= 10</strong>, then γ is considered infinite. If <strong>T &gt;= 10</strong>, then T is considered infinite. The threshold values of these infinities can be modified by changing the HG INF TEMPERATURE and HG INF GAMMA definitions in the package.</p>
 
 <h3>
 <a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
