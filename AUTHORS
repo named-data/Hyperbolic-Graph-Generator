@@ -1,0 +1,12 @@
+
+
+Chiara Orsini - chiara@caida.org :
+  designed, implemented, tested the Hyperbolic Graph Generator:
+  hggraphs library and tools (hyperbolic_graph_generator,
+  graph_properties, and greedy_routing)
+
+
+Rodrigo Aldecoa - raldecoa@neu.edu : 
+  tested the Hyperbolic Graph Generator
+  implemented : hg_math.h, hg_math.cpp
+
