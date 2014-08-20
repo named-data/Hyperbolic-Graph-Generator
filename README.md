@@ -11,7 +11,7 @@ Requirements:
 
 In order to install the Hyperbolic Graph Generator you need to follow the list of instructions below:
 ```sh
-$ sh bootstrap.sh
+$ sh ./bootstrap.sh  # non-release versions
 $ ./configure
 $ make
 $ (sudo) make install
