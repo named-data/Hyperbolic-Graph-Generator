@@ -1,10 +1,12 @@
 ## Hyperbolic-Graph-Generator
 
-The Hyperbolic-Graph-Generator is set of tools to generate synthetic graphs embedded into a hyperbolic space and to test the efficiency of the greedy forwarding. 
+The Hyperbolic-Graph-Generator is a set of tools to generate synthetic graphs embedded into a hyperbolic space and to test the efficiency of the greedy forwarding. 
+
 The Named Data Networking (NDN) name space has been recently mapped to a hyperbolic metric space (http://www.caida.org/research/routing/greedy_forwarding_ndn/), thus proving that the greedy forwarding
 is a viable approach to dramatically reduce routing table sizes in NDN routers.
 Indeed, hyperbolic metric spaces underlying complex networks enable efficient greedy forwarding without any
-global knowledge of the network topology. Since each node in the network has its coordinates in this hidden
+global knowledge of the network topology.
+Since each node in the network has its coordinates in this hidden
 metric space, a node can compute the distance between each of its neighbor nodes and the destinations whose
 coordinates are carried in packets, and forward packets to the neighbor that is the closest to the destination
 in the hyperbolic space. 
