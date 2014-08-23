@@ -1,16 +1,22 @@
 ## Hyperbolic-Graph-Generator
 
-The Hyperbolic-Graph-Generator is a set of tools to generate synthetic graphs embedded into a hyperbolic space and to test the efficiency of the greedy forwarding. 
 
-The Named Data Networking (NDN) name space has been recently mapped to a hyperbolic metric space (http://www.caida.org/research/routing/greedy_forwarding_ndn/), thus proving that the greedy forwarding
-is a viable approach to dramatically reduce routing table sizes in NDN routers.
-Indeed, hyperbolic metric spaces underlying complex networks enable efficient greedy forwarding without any
-global knowledge of the network topology.
-Since each node in the network has its coordinates in this hidden
-metric space, a node can compute the distance between each of its neighbor nodes and the destinations whose
-coordinates are carried in packets, and forward packets to the neighbor that is the closest to the destination
-in the hyperbolic space. 
+The Hyperbolic-Graph-Generator is a package of tools to generate
+graphs embedded in the hyperbolic plane, and to compute the efficiency
+of greedy forwarding in these graphs.
 
+This standalone package is also a core component of the hyperbolic
+routing package that is going to be integrated into the NDNSim (ndnsim.net).
+Hyperbolic routing is greedy geometric routing in a
+hyperbolically embedded network. Hyperbolic routing has attractive
+scalability and efficiency characteristics. In particular, applied to
+the AS Internet, hyperbolic routing is nearly optimal, i.e., maximally
+scalable (http://dx.doi.org/10.1038/ncomms1063/). The NDN testbed has
+been recently mapped to the hyperbolic plane yielding similar routing
+efficiency (http://www.caida.org/research/routing/greedy_forwarding_ndn/).
+Because of its exceptional scalability and efficiency characteristics,
+hyperbolic routing is one of the routing strategies in the NDN
+architecture.
 
 
 ### Installation:
