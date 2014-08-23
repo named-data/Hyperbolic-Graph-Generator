@@ -6,7 +6,7 @@ graphs embedded in the hyperbolic plane, and to compute the efficiency
 of greedy forwarding in these graphs.
 
 This standalone package is also a core component of the hyperbolic
-routing package that is going to be integrated into the NDNSim (ndnsim.net).
+routing package that is going to be integrated into the NDNSim (http://ndnsim.net).
 Hyperbolic routing is greedy geometric routing in a
 hyperbolically embedded network. Hyperbolic routing has attractive
 scalability and efficiency characteristics. In particular, applied to
