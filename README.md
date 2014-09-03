@@ -39,7 +39,8 @@ The procedure above builds three tools:
 - *greedy_routing*
 
 
-Also, it installs the *hggraphs library* (public interface is described in *hg_graphs_lib.h*). For more information about the installation process, please see the Installation FAQs.
+Also, it installs the *hggraphs library* (public interface is described in *hg_graphs_lib.h*). 
+For more information about the installation process, please see the Installation FAQs.
 
 ### Description:
 
