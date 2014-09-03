@@ -1,9 +1,0 @@
-
-
-Chiara Orsini - chiara@caida.org :
-  designed, implemented, tested the hggraphs library
-
-
-Rodrigo Aldecoa - raldecoa@neu.edu : 
-  tested the hggraphs library
-  implemented : hg_math.h, hg_math.cpp
