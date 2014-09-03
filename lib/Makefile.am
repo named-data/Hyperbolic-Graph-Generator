@@ -27,8 +27,6 @@
 # AM_CPPFLAGS - The contents of this variable are passed to every compilation that invokes the C preprocessor; it is a list of arguments to the preprocessor. For instance, -I and -D options should be listed here.
 AM_CPPFLAGS = 
 
-EXTRA_DIST = README.md
-
 # Each _LTLIBRARIES variable is a list of libtool libraries to build. 
 lib_LTLIBRARIES = libhggraphs.la
 
