@@ -1,0 +1,4 @@
+
+1.0.1:
+	Added a new option to specify a custom graph file name
+	(the .hg option is preserved)

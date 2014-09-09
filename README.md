@@ -77,6 +77,8 @@ OPTIONS:
 		default value is 1
 	-o	output folder
 		default value is current folder
+	-f	graph file name
+		default value is graph (.hg extension is always added)
 	-h	print help menu
 	-q	quiet (no output)
 
