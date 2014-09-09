@@ -70,6 +70,8 @@ void usage (string exe_name){
   cout << "\t" << "\t" << "default value is 1" << endl;
   cout << "\t" << "-o" << "\t" << "output folder" << endl; 
   cout << "\t" << "\t" << "default value is current folder" << endl;
+  cout << "\t" << "-f" << "\t" << "graph file name" << endl; 
+  cout << "\t" << "\t" << "default value is graph (.hg extension is always added)" << endl;
   cout << "\t" << "-h" << "\t" << "print help menu" << endl; 
   cout << "\t" << "-q" << "\t" << "quiet (no output)" << endl; 
   cout << endl;
@@ -88,6 +90,8 @@ int main (int argc, char **argv) {
   double zeta_eta = 1;  // parameter associated with curvature
   int seed = 1;         // random seed
   string folder = ".";
+  string graph_filename = "graph";
+  const string graph_ext = ".hg";
   bool verbose = true; 
 
   char *cvalue = NULL;
@@ -98,7 +102,7 @@ int main (int argc, char **argv) {
 
   opterr = 0;
  
-  while ((c = getopt (argc, argv, "n:k:g:t:z:s:o:hq")) != -1) {
+  while ((c = getopt (argc, argv, "n:k:g:t:z:s:o:f:hq")) != -1) {
     switch (c) {
     case 'n':
       n = atoi(optarg);
@@ -121,6 +125,9 @@ int main (int argc, char **argv) {
       break;
     case 'o':
       folder = optarg;
+      break;
+    case 'f':
+      graph_filename = optarg;
       break;
     case 'q':
       verbose = false;
@@ -217,6 +224,9 @@ int main (int argc, char **argv) {
     cout << "\t" << "Output folder [o]:"<< "\t\t\t"  << folder;
     if(folder == "./") { cout << "   (default)";}
     cout << endl;
+    cout << "\t" << "Graph file name [f]:"<< "\t\t\t"  << graph_filename << graph_ext;
+    if(graph_filename == "graph") { cout << "   (default)";}
+    cout << endl;
     cout << endl;
   }
 
@@ -239,9 +249,9 @@ int main (int argc, char **argv) {
     if(verbose) {
       cout << "Generated: " << "\t" << num_edges(*graph) << " links" << endl;
     }
-    hg_print_graph(graph, folder + "graph.hg");
+    hg_print_graph(graph, folder + graph_filename + graph_ext);
     if(verbose) {
-      cout << "Written: " << "\t" << folder << "graph.hg" << endl;
+      cout << "Written: " << "\t" << folder << graph_filename << graph_ext << endl;
       cout << endl;
     }
   }
