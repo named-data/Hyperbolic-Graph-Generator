@@ -46,6 +46,8 @@ using namespace std;
  * hyperbolic space */
 typedef struct struct_hg_coordinate {
   double r;     // radial coordinate, distance from the origin
+  double sinh_zr; // precalculated hyperbolic sine of (zeta * r) --speeds up the generation
+  double cosh_zr; // precalculated hyperbolic cosine of (zeta * r) --speeds up the generation
   double theta; // angular coordinate, angular distance from a reference point
 } hg_coordinate_t;
 

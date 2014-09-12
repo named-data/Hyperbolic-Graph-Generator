@@ -45,7 +45,11 @@ static void hg_assign_coordinates(hg_graph_t * graph, const hg_algorithm_paramet
   case HYPERBOLIC_STANDARD:
   case SOFT_CONFIGURATION_MODEL:
     for(id = 0; id < (*graph)[boost::graph_bundle].expected_n; id++) {
-      (*graph)[id].r = hg_quasi_uniform_radial_coordinate(in_par.radius, in_par.alpha);
+      double zeta = (*graph)[boost::graph_bundle].zeta_eta;
+      double r = hg_quasi_uniform_radial_coordinate(in_par.radius, in_par.alpha);
+      (*graph)[id].r = r;
+      (*graph)[id].sinh_zr = sinh(zeta * r);
+      (*graph)[id].cosh_zr = cosh(zeta * r);
       (*graph)[id].theta = hg_uniform_angular_coordinate();
     }
     break;
@@ -99,7 +103,7 @@ static double hg_get_lambda_from_Gauss_hypergeometric_function(hg_graph_t * grap
 /* ================= single model graph generators  ================= */
 
 
-static double hg_hyperbolic_distance_hyperbolic_rgg_standard(const hg_graph_t * graph,
+inline double hg_hyperbolic_distance_hyperbolic_rgg_standard(const hg_graph_t * graph,
 							     const hg_coordinate_t & node1, 
 							     const hg_coordinate_t & node2) {
   // check if it is the same node
@@ -114,8 +118,8 @@ static double hg_hyperbolic_distance_hyperbolic_rgg_standard(const hg_graph_t * 
   // equation 13
   double zeta = (*graph)[boost::graph_bundle].zeta_eta;
   double delta_theta = HG_PI - abs(HG_PI - abs(node1.theta - node2.theta));
-  double part1 = cosh(zeta * node1.r) * cosh(zeta * node2.r);
-  double part2 = sinh(zeta * node1.r) * sinh(zeta * node2.r) * cos(delta_theta);
+  double part1 = node1.cosh_zr * node2.cosh_zr;
+  double part2 = node1.sinh_zr * node2.sinh_zr * cos(delta_theta);
   return  acosh(part1 - part2) / zeta;
 }
 
@@ -175,7 +179,7 @@ hg_graph_t * hg_hyperbolic_rgg(const int n, const double k_bar,
 }
 
 
-static double hg_connection_probability_hyperbolic_standard(const hg_graph_t * graph,
+inline double hg_connection_probability_hyperbolic_standard(const hg_graph_t * graph,
 							    const hg_algorithm_parameters_t & p,
 							    const hg_coordinate_t & node1, 
 							    const hg_coordinate_t & node2) {
