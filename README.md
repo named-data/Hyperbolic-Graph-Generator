@@ -11,7 +11,7 @@ Hyperbolic routing is greedy geometric routing in a
 hyperbolically embedded network. Hyperbolic routing has attractive
 scalability and efficiency characteristics. In particular, applied to
 the AS Internet, hyperbolic routing is nearly optimal, i.e., maximally
-scalable (http://dx.doi.org/10.1038/ncomms1063/). The NDN testbed has
+scalable (http://dx.doi.org/10.1038/ncomms1063). The NDN testbed has
 been recently mapped to the hyperbolic plane yielding similar routing
 efficiency (http://www.caida.org/research/routing/greedy_forwarding_ndn/).
 Because of its exceptional scalability and efficiency characteristics,
