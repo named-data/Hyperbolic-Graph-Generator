@@ -75,8 +75,6 @@ hg_coordinate_t hg_get_coordinate(const hg_graph_t * graph, const int id) {
   assert(graph != NULL);
   hg_coordinate_t c;
   c.r = (*graph)[id].r;
-  c.sinh_zr = (*graph)[id].sinh_zr;
-  c.cosh_zr = (*graph)[id].cosh_zr;
   c.theta = (*graph)[id].theta;
   return c;
 }

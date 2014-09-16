@@ -42,38 +42,10 @@
  * of sinh(zeta * r) and cosh(zeta * r) for each value of r. It is an
  * STL map:
  *         <r, < sinh(zeta*r), cosh(zeta*r) > >  
+ * this structure does not need to be exported outside this coding unit
  */
 typedef map<double, pair<double,double> > r_precomputedsinhcosh;
 
-
-// static void hg_assign_coordinates(hg_graph_t * graph, const hg_algorithm_parameters_t & in_par) {
-//   hg_debug("\tAssigning coordinates");
-//   int id; // node identifier [0,n-1]
-//   switch((*graph)[boost::graph_bundle].type){
-//   case HYPERBOLIC_RGG: 
-//   case HYPERBOLIC_STANDARD:
-//   case SOFT_CONFIGURATION_MODEL:
-//     for(id = 0; id < (*graph)[boost::graph_bundle].expected_n; id++) {
-//       double zeta = (*graph)[boost::graph_bundle].zeta_eta;
-//       double r = hg_quasi_uniform_radial_coordinate(in_par.radius, in_par.alpha);
-//       (*graph)[id].r = r;
-//       (*graph)[id].sinh_zr = sinh(zeta * r);
-//       (*graph)[id].cosh_zr = cosh(zeta * r);
-//       (*graph)[id].theta = hg_uniform_angular_coordinate();
-//     }
-//     break;
-//   case ANGULAR_RGG:
-//   case SOFT_RGG:
-//   case ERDOS_RENYI:
-//     for(id = 0; id < (*graph)[boost::graph_bundle].expected_n; id++) {
-//       (*graph)[id].r = in_par.radius; // HG_INF_RADIUS
-//       (*graph)[id].theta = hg_uniform_angular_coordinate();
-//     }
-//     break;
-//   default:
-//     hg_log_err("Case not implemented.");
-//   }
-// }
 
 static void hg_assign_coordinates(hg_graph_t * graph, const hg_algorithm_parameters_t & in_par,
 				  r_precomputedsinhcosh * r_psc = NULL) {
@@ -105,6 +77,7 @@ static void hg_assign_coordinates(hg_graph_t * graph, const hg_algorithm_paramet
     hg_log_err("Case not implemented.");
   }
 }
+
 
 static void hg_init_graph(hg_graph_t * graph, const int & n, const double & k_bar, 
 			  const double & exp_gamma, const double & t, 
@@ -161,7 +134,7 @@ inline double hg_hyperbolic_distance_hyperbolic_rgg_standard(const hg_graph_t * 
   double part1, part2;
   if(r_psc != NULL) {
     part1 = (*r_psc)[node1.r].second * (*r_psc)[node2.r].second;
-    part2 = (*r_psc)[node1.r].first * (*r_psc)[node2.r].first * cos(delta_theta);
+    part2 = (*r_psc)[node1.r].first  * (*r_psc)[node2.r].first  * cos(delta_theta);
   }
   else {    
     part1 = cosh(zeta * node1.r) * cosh(zeta * node2.r);
@@ -488,8 +461,7 @@ static double hg_hyperbolic_distance_er(const hg_graph_t * graph,
   if(node1.r == node2.r && node1.theta == node2.theta) {
     return 0;
   }
-  // TODO: say why we consider this distance
-  // in fact, there is no "real distance"
+  // there is no "real distance", indeed!
   return 1; 
 }
 
