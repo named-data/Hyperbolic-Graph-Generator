@@ -69,6 +69,7 @@ If the gsl libraries are installed in a custom path, e.g.  they are in `/home/us
 	./configure CPPFLAGS='-I/home/user/mygsl/include' LDFLAGS="-L/home/user/mygsl/lib"
    
 If gsl are installed, the following command return the information to be put in the CPPFLAGS and LDFLAGS:
+    
     ```
    $ gsl-config --cflags --libs
       -I/opt/local/include
