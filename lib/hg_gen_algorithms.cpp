@@ -37,7 +37,46 @@
 
 /* ================= graph construction utilities ================= */
 
-static void hg_assign_coordinates(hg_graph_t * graph, const hg_algorithm_parameters_t & in_par) {
+
+/* r_precomputedsinhcosh is a structure that contains the precomputed values
+ * of sinh(zeta * r) and cosh(zeta * r) for each value of r. It is an
+ * STL map:
+ *         <r, < sinh(zeta*r), cosh(zeta*r) > >  
+ */
+typedef map<double, pair<double,double> > r_precomputedsinhcosh;
+
+
+// static void hg_assign_coordinates(hg_graph_t * graph, const hg_algorithm_parameters_t & in_par) {
+//   hg_debug("\tAssigning coordinates");
+//   int id; // node identifier [0,n-1]
+//   switch((*graph)[boost::graph_bundle].type){
+//   case HYPERBOLIC_RGG: 
+//   case HYPERBOLIC_STANDARD:
+//   case SOFT_CONFIGURATION_MODEL:
+//     for(id = 0; id < (*graph)[boost::graph_bundle].expected_n; id++) {
+//       double zeta = (*graph)[boost::graph_bundle].zeta_eta;
+//       double r = hg_quasi_uniform_radial_coordinate(in_par.radius, in_par.alpha);
+//       (*graph)[id].r = r;
+//       (*graph)[id].sinh_zr = sinh(zeta * r);
+//       (*graph)[id].cosh_zr = cosh(zeta * r);
+//       (*graph)[id].theta = hg_uniform_angular_coordinate();
+//     }
+//     break;
+//   case ANGULAR_RGG:
+//   case SOFT_RGG:
+//   case ERDOS_RENYI:
+//     for(id = 0; id < (*graph)[boost::graph_bundle].expected_n; id++) {
+//       (*graph)[id].r = in_par.radius; // HG_INF_RADIUS
+//       (*graph)[id].theta = hg_uniform_angular_coordinate();
+//     }
+//     break;
+//   default:
+//     hg_log_err("Case not implemented.");
+//   }
+// }
+
+static void hg_assign_coordinates(hg_graph_t * graph, const hg_algorithm_parameters_t & in_par,
+				  r_precomputedsinhcosh * r_psc = NULL) {
   hg_debug("\tAssigning coordinates");
   int id; // node identifier [0,n-1]
   switch((*graph)[boost::graph_bundle].type){
@@ -48,8 +87,9 @@ static void hg_assign_coordinates(hg_graph_t * graph, const hg_algorithm_paramet
       double zeta = (*graph)[boost::graph_bundle].zeta_eta;
       double r = hg_quasi_uniform_radial_coordinate(in_par.radius, in_par.alpha);
       (*graph)[id].r = r;
-      (*graph)[id].sinh_zr = sinh(zeta * r);
-      (*graph)[id].cosh_zr = cosh(zeta * r);
+      if(r_psc != NULL) {
+	(*r_psc).insert(make_pair(r, make_pair(sinh(zeta * r), cosh(zeta * r))));
+      }
       (*graph)[id].theta = hg_uniform_angular_coordinate();
     }
     break;
@@ -65,7 +105,6 @@ static void hg_assign_coordinates(hg_graph_t * graph, const hg_algorithm_paramet
     hg_log_err("Case not implemented.");
   }
 }
-
 
 static void hg_init_graph(hg_graph_t * graph, const int & n, const double & k_bar, 
 			  const double & exp_gamma, const double & t, 
@@ -105,7 +144,8 @@ static double hg_get_lambda_from_Gauss_hypergeometric_function(hg_graph_t * grap
 
 inline double hg_hyperbolic_distance_hyperbolic_rgg_standard(const hg_graph_t * graph,
 							     const hg_coordinate_t & node1, 
-							     const hg_coordinate_t & node2) {
+							     const hg_coordinate_t & node2,
+							     r_precomputedsinhcosh * r_psc = NULL) {
   // check if it is the same node
   if(node1.r == node2.r && node1.theta == node2.theta) {
     return 0;
@@ -118,8 +158,15 @@ inline double hg_hyperbolic_distance_hyperbolic_rgg_standard(const hg_graph_t * 
   // equation 13
   double zeta = (*graph)[boost::graph_bundle].zeta_eta;
   double delta_theta = HG_PI - abs(HG_PI - abs(node1.theta - node2.theta));
-  double part1 = node1.cosh_zr * node2.cosh_zr;
-  double part2 = node1.sinh_zr * node2.sinh_zr * cos(delta_theta);
+  double part1, part2;
+  if(r_psc != NULL) {
+    part1 = (*r_psc)[node1.r].second * (*r_psc)[node2.r].second;
+    part2 = (*r_psc)[node1.r].first * (*r_psc)[node2.r].first * cos(delta_theta);
+  }
+  else {    
+    part1 = cosh(zeta * node1.r) * cosh(zeta * node2.r);
+    part2 = sinh(zeta * node1.r) * sinh(zeta * node2.r) * cos(delta_theta);
+  }
   return  acosh(part1 - part2) / zeta;
 }
 
@@ -127,9 +174,10 @@ inline double hg_hyperbolic_distance_hyperbolic_rgg_standard(const hg_graph_t * 
 static double hg_connection_probability_hyperbolic_rgg(const hg_graph_t * graph,
 						       const hg_algorithm_parameters_t & p,
 						       const hg_coordinate_t & node1, 
-						       const hg_coordinate_t & node2) {
+						       const hg_coordinate_t & node2,
+						       r_precomputedsinhcosh * r_psc = NULL) {
   // equation 32: Heaviside function
-  if(hg_hyperbolic_distance_hyperbolic_rgg_standard(graph, node1, node2) <= p.radius) {
+  if(hg_hyperbolic_distance_hyperbolic_rgg_standard(graph, node1, node2, r_psc) <= p.radius) {
     return 1;
   }
   return 0;
@@ -158,7 +206,8 @@ hg_graph_t * hg_hyperbolic_rgg(const int n, const double k_bar,
   p.eta = -1; // not relevant for current model
   p.c = -1;  // not relevant for current model
   p.radius = hg_get_R_from_numerical_integration(graph, p);
-  hg_assign_coordinates(graph, p);
+  r_precomputedsinhcosh r_psc; 
+  hg_assign_coordinates(graph, p, &r_psc);
   hg_coordinate_t c1, c2;
   int id, other_id;
   hg_debug("\tInternal parameters:");
@@ -169,7 +218,7 @@ hg_graph_t * hg_hyperbolic_rgg(const int n, const double k_bar,
     c1 = hg_get_coordinate(graph, id);
     for(other_id = id+1; other_id < (*graph)[boost::graph_bundle].expected_n; other_id++) {
       c2 = hg_get_coordinate(graph, other_id);
-      if(HG_Random::get_random_01_value() < hg_connection_probability_hyperbolic_rgg(graph, p, c1, c2)){
+      if(HG_Random::get_random_01_value() < hg_connection_probability_hyperbolic_rgg(graph, p, c1, c2, &r_psc)){
 	add_edge(id, other_id, *graph);
 	//hg_debug("\t\tNew link: %d - %d ", id, other_id);
       }
@@ -182,7 +231,8 @@ hg_graph_t * hg_hyperbolic_rgg(const int n, const double k_bar,
 inline double hg_connection_probability_hyperbolic_standard(const hg_graph_t * graph,
 							    const hg_algorithm_parameters_t & p,
 							    const hg_coordinate_t & node1, 
-							    const hg_coordinate_t & node2) {
+							    const hg_coordinate_t & node2,
+							    r_precomputedsinhcosh * r_psc = NULL) {
   // check if it is the same node
   if(node1.r == node2.r && node1.theta == node2.theta) {
     return 0;
@@ -190,7 +240,7 @@ inline double hg_connection_probability_hyperbolic_standard(const hg_graph_t * g
   // equation 12: Fermi-Dirac function
   double zeta = (*graph)[boost::graph_bundle].zeta_eta;
   double t =  (*graph)[boost::graph_bundle].temperature;
-  double x = hg_hyperbolic_distance_hyperbolic_rgg_standard(graph, node1, node2);
+  double x = hg_hyperbolic_distance_hyperbolic_rgg_standard(graph, node1, node2, r_psc);
   double exponent = (double)1.0/t * zeta/2.0  * (x - p.radius);
   return 1.0 / (exp(exponent) + 1.0); 
 }
@@ -215,20 +265,21 @@ hg_graph_t * hg_hyperbolic_standard(const int n, const double k_bar,
   // computing internal parameters
   hg_debug("\tInternal parameters computation");
   hg_algorithm_parameters_t p;
-
   // alpha calculation. different for cold and hot regimes
-  if(temperature <= 1)
+  if(temperature <= 1) {
     p.alpha = 0.5 * zeta * (exp_gamma-1.0);
-  else
+  }
+  else {
     p.alpha = 0.5 * zeta/temperature * (exp_gamma-1.0);
-
+  }
   p.eta = -1; // not relevant for current model
   p.c = -1;  // not relevant for current model
   p.radius = hg_get_R_from_numerical_integration(graph, p);
   hg_debug("\tInternal parameters:");
   hg_debug("\t\tAlpha: %f", p.alpha);
   hg_debug("\t\tRadius: %f", p.radius);
-  hg_assign_coordinates(graph, p);
+  r_precomputedsinhcosh r_psc; 
+  hg_assign_coordinates(graph, p, &r_psc);
   hg_coordinate_t c1, c2;
   int id, other_id;
   hg_debug("\tCreating links");
@@ -236,7 +287,7 @@ hg_graph_t * hg_hyperbolic_standard(const int n, const double k_bar,
     c1 = hg_get_coordinate(graph, id);
     for(other_id = id+1; other_id < (*graph)[boost::graph_bundle].expected_n; other_id++) {
       c2 = hg_get_coordinate(graph, other_id);
-      if(HG_Random::get_random_01_value() < hg_connection_probability_hyperbolic_standard(graph, p, c1, c2)) {
+      if(HG_Random::get_random_01_value() < hg_connection_probability_hyperbolic_standard(graph, p, c1, c2, &r_psc)) {
 	add_edge(id, other_id, *graph);
 	//hg_debug("\t\tNew link: %d - %d ", id, other_id);
       }
