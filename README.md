@@ -193,12 +193,17 @@ Library files will be available in:
 **The boost libraries are not found, how can I fix this problem?**
 
 If the boost libraries are not installed, then install them using your package management system, or:
+
    1) download them at http://www.boost.org/
-   2) extract boost_**.tar.bz2 in a convenient location e.g. /home/user/
+
+   2) extract boost_xxx.tar.bz2 in a convenient location e.g. /home/user/
+
    Then run again the configure command in the Hyperbolic Graph Generator
    as follows:
 
+```
         ./configure CPPFLAGS='-I/home/user/myboost'
+```
 
    Note: boost are header-only libraries, no installation process is required
 
@@ -212,7 +217,9 @@ If the gsl libraries are not installed, then install them using your package man
 
 If the boost libraries are installed in a custom path, e.g. they are in `/home/user/myboost`, then the configure command must be run with the CPPFLAGS set:
 
+```
 	./configure CPPFLAGS='-I/home/user/myboost'
+```
 
 Boost are header-only libraries, then no LDFLAGS are required.
 
@@ -227,21 +234,22 @@ If the gsl libraries are installed in a custom path, e.g.  they are in `/home/us
 
 If gsl are installed, the following command return the information to be put in the CPPFLAGS and LDFLAGS:
 
-    ```
+```
    $ gsl-config --cflags --libs
       -I/opt/local/include
       -L/opt/local/lib -lgsl -lgslcblas
-    ```
+```
+
 
 **Both boost and gsl libraries are installed in non standard paths, how can I install the Hyperbolic Graph Generator?**
 
 A combination of the previous answers can be used.
 
+```
    ./configure CPPFLAGS='-I/home/user/myboost -I/home/user/mygsl/include' LDFLAGS="-L/home/user/mygsl/lib"
+```
 
-
-**error while loading shared libraries: libhggraphs.so.0: cannot open
-   shared object file: No such file or directory. How do I fix this problem?**
+**error while loading shared libraries: libhggraphs.so.0: cannot open shared object file: No such file or directory. How do I fix this problem?**
 
 Run the following command (or put that line in your profile
    configuration file for your current shell, e.g. ~/.profile for Mac
@@ -261,7 +269,6 @@ It is possible to set a different optimization level at configuration
 time, using the following option: 
 
 ```
-
    ./configure CXXLAGS='-O3'
 ```
 
