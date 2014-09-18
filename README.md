@@ -18,6 +18,8 @@ Because of its exceptional scalability and efficiency characteristics,
 hyperbolic routing is one of the routing strategies in the NDN
 architecture.
 
+More information are available at http://named-data.github.io/Hyperbolic-Graph-Generator/
+
 
 ### Installation:
 
@@ -165,11 +167,13 @@ OPTIONS:
 ###  Installation FAQs:
 
 **Where are the executables?**
+
 By default, `make install` installs the package's commands under  `/usr/local/bin`, copies the header files under `/usr/local/include`, while the compiled libraries are available at `/usr/local/lib`. 
 You can specify an installation prefix other than `/usr/local` by giving `configure` the option `--prefix=PREFIX`, where PREFIX must be an absolute path.
 
 
 **Can I install the Hyperbolic Graph Generator in my HOME directory?**
+
 Yes, all you need is to run `configure` using the `--prefix` option:
 	```
    	./configure --prefix=/home/user/my_hg_generator
@@ -187,6 +191,7 @@ Library files will be available in:
 
 
 **The boost libraries are not found, how can I fix this problem?**
+
 If the boost libraries are not installed, then install them using your package management system, or:
    1) download them at http://www.boost.org/
    2) extract boost_**.tar.bz2 in a convenient location e.g. /home/user/
@@ -199,10 +204,12 @@ If the boost libraries are not installed, then install them using your package m
 
 
 **The gsl libraries are not found, how can I fix this problem**
+
 If the gsl libraries are not installed, then install them using your package management system or follow the instructions at http://www.gnu.org/software/gsl/.
 
 
 **My boost libraries are not installed in a standard path, how can I build the Hyperbolic Graph Generator?**
+
 If the boost libraries are installed in a custom path, e.g. they are in `/home/user/myboost`, then the configure command must be run with the CPPFLAGS set:
 
 	./configure CPPFLAGS='-I/home/user/myboost'
@@ -211,11 +218,15 @@ Boost are header-only libraries, then no LDFLAGS are required.
 
 
 **My gsl libraries are not installed in a standard path, how can I install the Hyperbolic Graph Generator?**
+
 If the gsl libraries are installed in a custom path, e.g.  they are in `/home/user/mygsl`, then the configure command must be run with both the CPPFLAGS and LDFLAGS set:
 
+	```
 	./configure CPPFLAGS='-I/home/user/mygsl/include' LDFLAGS="-L/home/user/mygsl/lib"
-   
+   	```	
+
 If gsl are installed, the following command return the information to be put in the CPPFLAGS and LDFLAGS:
+
     ```
    $ gsl-config --cflags --libs
       -I/opt/local/include
@@ -223,6 +234,7 @@ If gsl are installed, the following command return the information to be put in 
     ```
 
 **Both boost and gsl libraries are installed in non standard paths, how can I install the Hyperbolic Graph Generator?**
+
 A combination of the previous answers can be used.
 
    ./configure CPPFLAGS='-I/home/user/myboost -I/home/user/mygsl/include' LDFLAGS="-L/home/user/mygsl/lib"
@@ -230,29 +242,40 @@ A combination of the previous answers can be used.
 
 **error while loading shared libraries: libhggraphs.so.0: cannot open
    shared object file: No such file or directory. How do I fix this problem?**
+
 Run the following command (or put that line in your profile
    configuration file for your current shell, e.g. ~/.profile for Mac
    OS X,  ~/.bash_profile for FreeBSD, ~/.bash_rc for Ubuntu):
+
 ```
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 ```
-This works if your library is installed in /usr/local/lib. Otherwise
+
+This works if your library is installed in /usr/local/lib. Otherwise,
 substitute that with you lib installation directory.
 
 
 **Is there a way to improve the speed of the library?**
+
 It is possible to set a different optimization level at configuration
 time, using the following option: 
 
+```
+
    ./configure CXXLAGS='-O3'
+```
 
 The default optimization level is -O2.
 
 
 **Can I use the hggraphs library to develop new tools?**
+
 The libhggraphs public interface is described in the hg_graphs_lib.h file that is installed in `include/hg_graphs_lib.h`. In order to link the library to your tool you need to provide the -lhggraphs option as well as the path to the lib folder containing the library at linking time.
 Let's suppose that the Hyperbolic Graph Generator installed in the default path `/usr/local`, in order to build a new tool the following operations have to be performed:
 
+```
 	g++ -I/usr/local/include -c my_new_tool.o my_new_tool.cpp
 	g++ -o my_new_tool my_new_tool.o -L/usr/local/lib -lhggraphs
+```
+
 
