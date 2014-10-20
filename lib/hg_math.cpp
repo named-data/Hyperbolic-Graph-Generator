@@ -183,9 +183,11 @@ double hg_get_R(hg_graph_t * graph, hg_algorithm_parameters_t & p){
     }
     ++it;
     //cout << it << " - " << n*res << " - " << params.R << endl;
-  }while((abs(n*res-k_bar) > eps || isnan(res)) && it < max_iterations);
+  }while((abs(n*res-k_bar) > eps || isnan(res)) && it < max_iterations 
+	 && high > std::numeric_limits< double >::min());
 
-  if(isnan(res) || abs(n*res-k_bar) > eps){
+  if(isnan(res) || abs(n*res-k_bar) > eps 
+     || high < std::numeric_limits< double >::min()){
     cerr << "Network cannot be generated. Try different parameters." << endl;
     exit(0);
   }
