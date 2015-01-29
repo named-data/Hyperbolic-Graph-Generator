@@ -95,7 +95,7 @@ void hg_print_graph(const hg_graph_t *g, const string filename, unsigned int sta
  
   file.open(filename.c_str(), ios::out);
   if(!file.fail() and file.is_open()) {
-    file << std::setprecision(5) << std::fixed;
+    file << std::setprecision(10) << std::fixed;
     // hg_graph parameters
     file << "N" << "\t" << (*g)[boost::graph_bundle].expected_n << "\t";
     file << "T" << "\t" << (*g)[boost::graph_bundle].temperature << "\t";
