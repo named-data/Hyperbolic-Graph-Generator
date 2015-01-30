@@ -158,14 +158,14 @@ int main (int argc, char **argv) {
 
   hg_graph_t::vertex_iterator vertexIt, vertexEnd;
   hg_graph_t::adjacency_iterator neighbourIt, neighbourEnd;
-  tie(vertexIt, vertexEnd) = vertices(*graph);
+  boost::tie(vertexIt, vertexEnd) = vertices(*graph);
   for (; vertexIt != vertexEnd; ++vertexIt) { 
     // degree
     k =  degree(*vertexIt,*graph);
     if(k == 0) continue; // we do not consider 0-degree nodes
     // knn
     knn = 0;
-    tie(neighbourIt, neighbourEnd) = adjacent_vertices(*vertexIt, *graph); 
+    boost::tie(neighbourIt, neighbourEnd) = adjacent_vertices(*vertexIt, *graph); 
     for (; neighbourIt != neighbourEnd; ++neighbourIt){ 
       knn += degree(*neighbourIt,*graph);
     }
@@ -207,8 +207,8 @@ int main (int argc, char **argv) {
     cout << "\t" << "angular.txt"<< endl;
     cout << endl;
     cout << "Average values (std deviation): " << endl;
-    std::cout.setf( std::ios::fixed, std:: ios::floatfield ); // floatfield set to fixed
-    std::cout.precision(3);
+    cout.setf( std::ios::fixed, std:: ios::floatfield ); // floatfield set to fixed
+    cout.precision(3);
     cout << "\t" << "degree:\t\t" << boost::accumulators::mean(ks);
     cout<< " (" << sqrt(boost::accumulators::moment<2>(ks)) << ")"<< endl;
     cout << "\t" << "knn:\t\t" << boost::accumulators::mean(knns);

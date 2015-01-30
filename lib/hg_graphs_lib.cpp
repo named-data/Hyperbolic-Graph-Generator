@@ -112,7 +112,7 @@ void hg_print_graph(const hg_graph_t *g, const string filename, unsigned int sta
     file << "I" << "\t" << starting_id << endl;
     // hg_graph vertex coordinates
     hg_graph_t::vertex_iterator vertexIt, vertexEnd;
-    tie(vertexIt, vertexEnd) = vertices(*g);
+    boost::tie(vertexIt, vertexEnd) = vertices(*g);
     for (; vertexIt != vertexEnd; ++vertexIt) { 
       file << *vertexIt + starting_id << "\t";
       file << (*g)[*vertexIt].r << "\t";
@@ -120,7 +120,7 @@ void hg_print_graph(const hg_graph_t *g, const string filename, unsigned int sta
     }
     // hg_graph edgelist
     hg_graph_t::edge_iterator edgeIt, edgeEnd;
-    tie(edgeIt, edgeEnd) = edges(*g);
+    boost::tie(edgeIt, edgeEnd) = edges(*g);
     for (; edgeIt != edgeEnd; ++edgeIt) { 
       file << source(*edgeIt, *g) + starting_id << "\t";
       file << target(*edgeIt, *g) + starting_id << endl;
