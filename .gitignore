@@ -1,3 +1,8 @@
+# temp files
+*~
+*.#*
+.DS_Store
+
 # Compiled Object files
 *.slo
 *.lo
@@ -19,3 +24,61 @@
 *.exe
 *.out
 *.app
+
+# helpful to me only?
+TAGS
+
+# Compiled programs
+ChangeLog
+*.tar.gz
+tools/graph_properties
+tools/greedy_routing
+tools/hyperbolic_graph_generator
+
+# Autotools files
+# http://www.gnu.org/software/automake
+
+Makefile.in
+Makefile
+
+# http://www.gnu.org/software/autoconf
+
+/autom4te.cache
+/aclocal.m4
+/compile
+/configure
+/depcomp
+/install-sh
+/missing
+.deps/
+/config.h
+config.status
+config.h.in
+config.log
+configure.scan
+INSTALL
+stamp-h1
+.libs/
+autoscan.log
+config.guess
+config.sub
+libtool
+ltmain.sh
+m4/libtool.m4
+m4/ltoptions.m4
+m4/ltsugar.m4
+m4/ltversion.m4
+m4/lt~obsolete.m4
+
+# in sub-project
+lib/autom4te.cache
+lib/aclocal.m4
+lib/compile
+lib/configure
+lib/config.h
+lib/depcomp
+lib/install-sh
+lib/missing
+lib/m4
+
+
