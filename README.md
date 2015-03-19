@@ -5,6 +5,9 @@ The Hyperbolic-Graph-Generator is a package of tools to generate
 graphs embedded in the hyperbolic plane, and to compute the efficiency
 of greedy forwarding in these graphs.
 
+More details on the graph models implemented in the package are available
+at http://arxiv.org/abs/1503.05180/.
+
 This standalone package is also a core component of the hyperbolic
 routing package that is going to be integrated into the NDNSim (http://ndnsim.net).
 Hyperbolic routing is greedy geometric routing in a
