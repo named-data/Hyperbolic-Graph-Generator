@@ -71,22 +71,22 @@ http://arxiv.org/abs/1503.05180
 
 PARAMETERS:
 -n	graph size (number of nodes)
-default value is 1000
+        default value is 1000
 -k	expected average degree
-default value is 10
+        default value is 10
 -g	expected power-law exponent gamma
-default value is 2 (infinite gamma = 10)
+        default value is 2 (infinite gamma = 10)
 -t	temperature
-default value is 0 (infinite temperature = 10)
+        default value is 0 (infinite temperature = 10)
 -z	square root of curvature zeta=sqrt(-K)
-or ratio eta=zeta/T in Soft Configuration Model
-default value is 1
+        or ratio eta=zeta/T in Soft Configuration Model
+        default value is 1
 -s	random seed
-default value is 1
+        default value is 1
 -o	output folder
-default value is current folder
+        default value is current folder
 -f	graph file name
-default value is graph (.hg extension is always added)
+        default value is graph (.hg extension is always added)
 -h	print help menu
 -q	quiet (no information print on standard output)
 
@@ -148,25 +148,25 @@ the polar coordinates of each node, its degree, its average neighbor
 degree, and its clustering coefficient.
 
 PARAMETERS:
--i	graph file (in hg format)
-default value is ./graph.hg
--o	output folder
-default value is current folder
--h	print help menu
+-i	   graph file (in hg format)
+       default value is ./graph.hg
+-o   output folder
+       default value is current folder
+-h   print help menu
 
 OUTPUT:
 The program generates five text files having the following format:
 
 radial.txt
-<node id> <radial coordinate>
+    <node id> <radial coordinate>
 angular.txt
-<node id> <angular coordinate>
+    <node id> <angular coordinate>
 degree.txt
-<node id> <node degree>
+    <node id> <node degree>
 knn.txt
-<node id> <node avg. neigh. degree>
+    <node id> <node avg. neigh. degree>
 cc.txt
-<node id> <node clustering coefficient>
+    <node id> <node clustering coefficient>
 
 
 EXAMPLE:
@@ -194,12 +194,12 @@ the information sent by the source node would have reached the destination
 if each node would adopt the greedy routing rules.
 
 PARAMETERS:
--i	input graph file (in hg format)
-default value is ./graph.hg
+-i	    input graph file (in hg format)
+        default value is ./graph.hg
 -a	number of attempts
-default value is 10000
+        default value is 10000
 -s	random seed
-default value is 1
+        default value is 1
 -h	print help menu
 
 OUTPUT:
