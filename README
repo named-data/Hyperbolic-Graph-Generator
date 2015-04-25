@@ -21,7 +21,8 @@ Because of its exceptional scalability and efficiency characteristics,
 hyperbolic routing is one of the routing strategies in the NDN
 architecture.
 
-The software package includes three tools (see README_INSTALL):
+The software package includes three tools (see README_INSTALL for
+information on installation details):
 - hyperbolic_graph_generator
 - graph_properties
 - greedy_routing
@@ -31,20 +32,25 @@ The software package includes three tools (see README_INSTALL):
 
 ### Description:
 
-1) hyperbolic_graph_generator: A tool to generate synthetic graphs embedded into a hyperbolic space.
+1) hyperbolic_graph_generator: a tool to generate synthetic graphs embedded
+   into a hyperbolic space.
 
 NAME: 
-      hyperbolic_graph_generator - hyperbolic graphs generator 
+	hg_graph_generator -- generate an hyperbolic graph compatible with user parameters 
 
 SYNOPSIS: 
-	  hg_graph_generator [options] [args] 
+	hg_graph_generator [parameters]  
 
 DESCRIPTION:
-	The program generates random hyperbolic graphs according to
-	http://dx.doi.org/10.1103/PhysRevE.82.036106
+	The program generates a file (graph.hg is the default file name) that
+	describes the geometric coordinates and the links of a hyperbolic graph
+	compatible with the parameters provided by the user. The program generates
+	random hyperbolic graphs according to the models in:
+	            http://dx.doi.org/10.1103/PhysRevE.82.036106
+	A description of how the hyperbolic graph generator works can be found at:
+	            http://arxiv.org/abs/1503.05180
 
-
-OPTIONS:
+PARAMETERS:
 	-n	graph size (number of nodes)
 		default value is 1000
 	-k	expected average degree
@@ -54,7 +60,7 @@ OPTIONS:
 	-t	temperature
 		default value is 0 (infinite temperature = 10)
 	-z	square root of curvature zeta=sqrt(-K)
-	    or ratio eta=zeta/T in Soft Configuration Model
+		or ratio eta=zeta/T in Soft Configuration Model
 		default value is 1
 	-s	random seed
 		default value is 1
@@ -63,17 +69,21 @@ OPTIONS:
 	-f	graph file name
 		default value is graph (.hg extension is always added)
 	-h	print help menu
-	-q	quiet (no output)
+	-q	quiet (no information print on standard output)
 
-OUTPUT FORMAT:
-	The program outputs a graph using the following format.
-	The first line describes the main graph parameters:
-	N <num nodes> T <tempearature> G <gamma> K <avg.degree> Z <zeta> S <seed> I <initial_node_id>
-	The following <num nodes> lines associate a polar coordinate
-	to each node of the graph:
-		node_id		radial coordinate	angular coordinate
-	Finally, the links are listed:
-		node_id  node_id
+OUTPUT:
+	The program generates a file (./graph.hg unless the -o or -f options are turned on)
+	that lists the coordinates of each node in the hyperbolic space as well as the 
+	adjacency list. The file format is the following:
+
+	# The first line describes the main graph parameters:
+	N <num nodes> T <temperature> G <gamma> K <avg.degree> Z <zeta> S <seed> I <initial_node_id>
+
+	# A line for each node and its polar coordinates:
+	<node_id>	<radial coordinate>	<angular coordinate>
+
+	# A line for each link:
+	<node_id>	<node id> 
 
 	Example:
 	N	100	T	0	G	2	K	10	Z	2	S	1    I  1
@@ -102,31 +112,42 @@ EXAMPLE:
 
 
 
-
-
-2) graph_properties: A tool to compute some basic graph properties of the generated hyperbolic graphs.
+2) graph_properties: a tool to compute some basic graph properties of the generated
+   hyperbolic graphs.
 
 NAME: 
-      graph_properties - hyperbolic graphs properties computation 
+	graph_properties -- compute properties of hyperbolic graphs
 
 SYNOPSIS: 
-	  graph_properties [options] [args] 
+	graph_properties [parameters] 
 
 DESCRIPTION:
-	The program computes the following graph properties:
-	radial.txt contains pairs: <node id> <radial coordinate>
-	angular.txt contains pairs: <node id> <angular coordinate>
-	degree.txt contains pairs: <node id> <node degree>
-	knn.txt contains pairs: <node id> <node avg. neigh. degree>
-	cc.txt contains pairs: <node id> <node clustering coefficient>
+	The program computes some graph  properties associated with nodes of the
+	hyperbolic graph provided as input (./graph.hg is default), in detail: 
+	the polar coordinates of each node, its degree, its average neighbor
+	degree, and its clustering coefficient.
 
-OPTIONS:
+PARAMETERS:
 	-i	graph file (in hg format)
 		default value is ./graph.hg
 	-o	output folder
 		default value is current folder
 	-h	print help menu
-    	-q	quiet (no output)
+
+OUTPUT:
+	The program generates five text files having the following format:
+
+	radial.txt
+			<node id> <radial coordinate>
+	angular.txt
+			<node id> <angular coordinate>
+	degree.txt
+			<node id> <node degree>
+	knn.txt
+			<node id> <node avg. neigh. degree>
+	cc.txt
+			<node id> <node clustering coefficient>
+
 
 EXAMPLE:
 	
@@ -136,22 +157,23 @@ EXAMPLE:
 
 
 
-
-
-3) greedy_routing: A tool to test the greedy routing on hyperbolic graphs.
+3) greedy_routing: a tool to test the greedy routing on hyperbolic graphs.
 
 NAME: 
-	greedy_routing - greedy routing success ratio computation. 
+	greedy_routing -- compute the greedy routing success ratio 
 
 SYNOPSIS: 
-	greedy_routing [options] [args] 
+	greedy_routing [parameters] 
 
 DESCRIPTION:
-	Greedy routing performance test: it computes the greedy routing
-	success ratio taking into account [a] (default 10000) random pairs
-	belonging to the same connected component.
+	The program loads in memory a hyperbolic graph (./graph.hg by default),
+	it simulates the greedy routing on a set of random source-destination node
+	pairs belonging to the same connected component (default is 10,000  random
+	pairs), and finally outputs the success ratio (i.e. the percentage of times
+	the information sent by the source node would have reached the destination
+	if each node would adopt the greedy routing rules.
 
-OPTIONS:
+PARAMETERS:
 	-i	input graph file (in hg format)
 		default value is ./graph.hg
 	-a	number of attempts
@@ -160,6 +182,9 @@ OPTIONS:
 		default value is 1
 	-h	print help menu
 
+OUTPUT:
+	The program print the success ratio to standard output.
+
 EXAMPLE:
 
 	# Test geometric greedy routing in the graph located in graph_example.hg
@@ -167,3 +192,5 @@ EXAMPLE:
 	# The seed for the random generator is 12345
 	
 	greedy_routing -i graph_example.hg -a 20000 -s 12345
+
+
