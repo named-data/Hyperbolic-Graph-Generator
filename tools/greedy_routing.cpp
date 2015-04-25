@@ -47,17 +47,20 @@ using namespace std;
 
 void usage (string exe_name){
   cout << "NAME: " << endl;
-  cout << "\t" << "greedy_routing" << " - greedy routing success ratio computation " << endl;
+  cout << "\t" << "greedy_routing" << " -- compute the greedy routing success ratio " << endl;
   cout << endl;
   cout << "SYNOPSIS: " << endl;
-  cout << "\t" << "greedy_routing" << " [options] [args] " << endl;
+  cout << "\t" << "greedy_routing" << " [parameters] " << endl;
   cout << endl;
   cout << "DESCRIPTION:" << endl;
-  cout << "\t" << "Greedy routing performace test: it computes the greedy routing" << endl;
-  cout << "\t" << "success ratio taking into account [a] (default 10000) random pairs" << endl;
-  cout << "\t" << "belonging to the same connected component." << endl;
+  cout << "\t" <<"The program loads in memory a hyperbolic graph (./graph.hg by default)," << endl;
+  cout << "\t" << "it simulates the greedy routing on a set of random source-destination node" << endl;
+  cout << "\t" << "pairs belonging to the same connected component (default is 10,000  random" << endl;
+  cout << "\t" << "pairs), and finally outputs the success ratio (i.e. the percentage of times" << endl;
+  cout << "\t" << "the information sent by the source node would have reached the destination" << endl;
+  cout << "\t" << "if each node would adopt the greedy routing rules." << endl;
   cout << endl;
-  cout << "OPTIONS:"<< endl;
+  cout << "PARAMETERS:"<< endl;
   cout << "\t" << "-i" << "\t" << "input graph file (in hg format)" << endl;
   cout << "\t" << "\t" << "default value is ./graph.hg" << endl;
   cout << "\t" << "-a" << "\t" << "number of attempts" << endl;
@@ -65,6 +68,9 @@ void usage (string exe_name){
   cout << "\t" << "-s" << "\t" << "random seed" << endl;
   cout << "\t" << "\t" << "default value is 1" << endl;
   cout << "\t" << "-h" << "\t" << "print help menu" << endl; 
+  cout << endl;
+  cout << "OUTPUT:" << endl;
+  cout << "\t" << "The program print the success ratio to standard output." << endl;
   cout << endl;
   return;
 }
