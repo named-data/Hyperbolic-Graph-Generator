@@ -25,7 +25,7 @@
 
 AC_PREREQ([2.61])
 
-AC_INIT([Hyperbolic_Graph_Generator], [1.0.1], [chiara@caida.org])
+AC_INIT([Hyperbolic_Graph_Generator], [1.0.2], [chiara@caida.org])
 AC_LANG_PUSH([C++])
 
 HYPERBOLIC_GRAPH_GENERATOR_MAJOR_VERSION=0

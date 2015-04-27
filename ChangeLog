@@ -1,4 +1,11 @@
 
+1.0.2:
+	Minor bugfixes.
+	Documentation is more thorough.
+
 1.0.1:
 	Added a new option to specify a custom graph file name
 	(the .hg option is preserved)
+
+1.0.0:
+	Hyperbolic Graph Generator has been released!

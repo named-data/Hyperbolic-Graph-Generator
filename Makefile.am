@@ -26,7 +26,7 @@
 SUBDIRS = lib tools
 AM_CPPFLAGS = -I$(top_srcdir) -I$(top_srcdir)/lib
 
-EXTRA_DIST = Hyperbolic_Graph_Generation.pdf README.md
+EXTRA_DIST = README.md
 
 ACLOCAL_AMFLAGS = -I m4
 
