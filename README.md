@@ -55,10 +55,10 @@ A tool to generate synthetic graphs embedded into a hyperbolic space.
 
 ```
 NAME: 
-hg_graph_generator -- generate an hyperbolic graph compatible with user parameters 
+hyperbolic_graph_generator -- generate an hyperbolic graph compatible with user parameters 
 
 SYNOPSIS: 
-hg_graph_generator [parameters]  
+hyperbolic_graph_generator [parameters]  
 
 DESCRIPTION:
 The program generates a file (graph.hg is the default file name) that
