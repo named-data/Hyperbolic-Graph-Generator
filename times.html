@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Hyperbolic-graph-generator: benchmark ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Hyperbolic-graph-generator benchmarks</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/named-data/Hyperbolic-Graph-Generator">View on GitHub</a>
+
+          <h1 id="project_title">Hyperbolic-graph-generator</h1>
+          <h2 id="project_tagline">A tool to generate synthetic graphs embedded into a hyperbolic space.</h2>
+
+            <section id="downloads">
+              <a class="tar_download_link"
+
+      href="https://github.com/named-data/Hyperbolic-Graph-Generator/releases/download/v1.0.2/hyperbolic_graph_generator-1.0.2.tar.gz">Download the Hyperbolic Graph Generator v1.0.2</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a name="welcome-to-the-hyperbolic-graph-generator-pages"
+    class="anchor"
+    href="#welcome-to-the-hyperbolic-graph-generator-pages"><span
+    class="octicon octicon-link"></span></a>Hyperbolic Graph Generator
+    execution times</h3>
+
+      <p align="justify"> We run the Hyperbolic graph generator on a
+      2.4 GHz Intel Core i7 machine and we report the execution times
+      (in milliseconds) for multiple configurations. We consider a
+      fixed average degree value equal to <strong>10</strong> and
+      we vary the graph size (i.e. number of nodes), the expected
+      power-law exponent (i.e. gamma), and the temperature value for
+      the simulated annealing process.
+      In our tests we choose the following combinations of parameters:
+      <ul>
+        <li> gamma equal to <strong>2</strong>, <strong>3</strong>,
+        and <strong>infinite</strong></li>
+        <li> temperature equal to <strong>0</strong>,
+      <strong>0.5</strong>, <strong>1</strong>, <strong>1.5</strong>, and <strong>infinite</strong></li>
+        <li> N values in the range <strong>128</strong> to
+      <strong>32,768</strong> (power of 2 steps).
+    </ul>
+    In all cases, the graphs is generated (and written to file) in less than 5 minutes.
+      </p>
+      
+
+<div align="center">   
+<img src="images/times_g2.svg" alt="hi" class="inline" style="width: 95%"/>
+</div>
+
+<div align="center">      
+<img src="images/times_g3.svg" alt="hi" class="inline" style="width: 95%"/>
+</div>
+
+      <p align="justify"> Graphics above show results when gamma is finite,
+we generate Spherical RGG, Soft Spherical RGG, Erdos-Renyi graphs. </p>
+
+<div align="center">      
+<img src="images/times_ginf.svg" alt="hi" class="inline" style="width: 95%"/>
+</div>
+
+      <p align="justify"> Graphics above show results when gamma is finite,
+we generate Hyperbolic RGG, Soft Hyperbolic RGG, and Soft Configuration Model graphs. </p>
+
+<h3>
+<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+<p align="justify">The Hyperbolic Graph Generator software has been designed and
+implemented by Chiara Orsini (<a
+href="https://github.com/chiaraorsini"
+class="user-mention">@chiaraorsini</a>), and Rodrigo Aldecoa (<a
+href="https://github.com/raldecoa"
+class="user-mention">@raldecoa</a>). </p>
+
+<h3>
+<a name="support-or-contact" class="anchor"
+href="#support-or-contact"><span class="octicon
+octicon-link"></span></a>Support or Contact</h3>
+This work was supported by NSF Grants no. CNS-1344289, CNS-1442999,
+CNS-0964236, CNS-1441828, CNS-1039646, and CCF-1212778; DARPA grant
+no. HR0011–12-1–0012; Cisco Systems.
+
+<div align="right">
+<BR>
+<a href="index.html">Go back to main page</a>
+</div>
+
+</section>
+
+
+</div>
+
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Hyperbolic-graph-generator maintained by <a href="https://github.com/chiaraorsini">chiaraorsini</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
