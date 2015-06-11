@@ -39,26 +39,43 @@
     class="octicon octicon-link"></span></a>Hyperbolic Graph Generator
     execution times</h3>
 
-      <p align="justify"> Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment </p>
+      <p align="justify"> We run the Hyperbolic graph generator on a
+      2.4 GHz Intel Core i7 machine and we report the execution times
+      (in milliseconds) for multiple configurations. We consider a
+      fixed average degree value equal to <strong>10</strong> and
+      we vary the graph size (i.e. number of nodes), the expected
+      power-law exponent (i.e. gamma), and the temperature value for
+      the simulated annealing process.
+      In our tests we choose the following combinations of parameters:
+      <ul>
+        <li> gamma equal to <strong>2</strong>, <strong>3</strong>,
+        and <strong>infinite</strong></li>
+        <li> temperature equal to <strong>0</strong>,
+      <strong>0.5</strong>, <strong>1</strong>, <strong>1.5</strong>, and <strong>infinite</strong></li>
+        <li> N values in the range <strong>128</strong> to
+      <strong>32,768</strong> (power of 2 steps).
+    </ul>
+    In all cases, the graphs is generated (and written to file) in less than 5 minutes.
+      </p>
       
 
 <div align="center">   
-<img src="images/times_g2.png" alt="hi" class="inline" style="width: 95%"/>
+<img src="images/times_g2.svg" alt="hi" class="inline" style="width: 95%"/>
 </div>
-
-      <p align="justify"> Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment </p>
 
 <div align="center">      
-<img src="images/times_g3.png" alt="hi" class="inline" style="width: 95%"/>
+<img src="images/times_g3.svg" alt="hi" class="inline" style="width: 95%"/>
 </div>
 
-      <p align="justify"> Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment </p>
+      <p align="justify"> Graphics above show results when gamma is finite,
+we generate Spherical RGG, Soft Spherical RGG, Erdos-Renyi graphs. </p>
 
 <div align="center">      
-<img src="images/times_ginf.png" alt="hi" class="inline" style="width: 95%"/>
+<img src="images/times_ginf.svg" alt="hi" class="inline" style="width: 95%"/>
 </div>
 
-      <p align="justify"> Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment Describe the experiment </p>
+      <p align="justify"> Graphics above show results when gamma is finite,
+we generate Hyperbolic RGG, Soft Hyperbolic RGG, and Soft Configuration Model graphs. </p>
 
 <h3>
 <a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
