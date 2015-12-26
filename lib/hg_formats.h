@@ -69,6 +69,7 @@ typedef struct struct_hg_parameters {
   double expected_degree;
   int seed;
   double zeta_eta;
+  unsigned int starting_id;
 } hg_parameters_t;
 
 /* Graph generation internal parameters */

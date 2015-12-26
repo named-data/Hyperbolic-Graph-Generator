@@ -92,7 +92,8 @@ static void hg_init_graph(hg_graph_t * graph, const int & n, const double & k_ba
   (*graph)[boost::graph_bundle].expected_gamma = exp_gamma;
   (*graph)[boost::graph_bundle].expected_degree = k_bar;
   (*graph)[boost::graph_bundle].zeta_eta = zeta_eta;
-  (*graph)[boost::graph_bundle].seed = seed;  
+  (*graph)[boost::graph_bundle].seed = seed;
+  (*graph)[boost::graph_bundle].starting_id = 1;  
   // Init random generator
   HG_Random::init(seed);  
 }

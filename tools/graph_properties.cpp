@@ -168,6 +168,9 @@ int main (int argc, char **argv) {
     cout << "Graph properties computation" << endl;
   }
 
+
+  unsigned int starting_id = (*graph)[boost::graph_bundle].starting_id;
+  
   hg_graph_t::vertex_iterator vertexIt, vertexEnd;
   hg_graph_t::adjacency_iterator neighbourIt, neighbourEnd;
   boost::tie(vertexIt, vertexEnd) = vertices(*graph);
@@ -187,15 +190,15 @@ int main (int argc, char **argv) {
     // clustering coefficient 
     cc = clustering_coefficient(*graph,*vertexIt);
     // putting data in maps and accumulators
-    degree_map.insert(make_pair(*vertexIt,k));
-    avg_neigh_degree.insert(make_pair(*vertexIt,knn));
-    clust_coeff.insert(make_pair(*vertexIt,cc));
+    degree_map.insert(make_pair(*vertexIt + starting_id,k));
+    avg_neigh_degree.insert(make_pair(*vertexIt + starting_id,knn));
+    clust_coeff.insert(make_pair(*vertexIt + starting_id,cc));
     ks(k);
     knns(knn);
     ccs(cc);
     // radial and angular coordinates
-    radial.insert(make_pair(*vertexIt, (*graph)[*vertexIt].r));
-    angular.insert(make_pair(*vertexIt, (*graph)[*vertexIt].theta));
+    radial.insert(make_pair(*vertexIt + starting_id, (*graph)[*vertexIt].r));
+    angular.insert(make_pair(*vertexIt + starting_id, (*graph)[*vertexIt].theta));
     hg_debug("%lu: k %f \t knn %f \t cc %f \t (%f,%f)", *vertexIt, k, knn, cc, (*graph)[*vertexIt].r, (*graph)[*vertexIt].theta);
   }
 

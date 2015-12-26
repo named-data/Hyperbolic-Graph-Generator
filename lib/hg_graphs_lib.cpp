@@ -48,7 +48,7 @@ hg_graph_t * hg_read_graph(const string filename) {
   // opening file
   ifstream file;
   int expected_n;
-  unsigned int starting_id;
+
   file.open(filename.c_str(), ios::in);
   if(!file.fail() and file.is_open()) {
     // reading first line
@@ -60,7 +60,7 @@ hg_graph_t * hg_read_graph(const string filename) {
     file >> par >> (*g)[boost::graph_bundle].expected_degree;
     file >> par >> (*g)[boost::graph_bundle].zeta_eta;
     file >> par >> (*g)[boost::graph_bundle].seed;
-    file >> par >> starting_id;
+    file >> par >> (*g)[boost::graph_bundle].starting_id;
     // reading coordinates
     for(i = 0; i < expected_n; i++) {
       file >> node1 >> radial >> angular;
@@ -68,6 +68,7 @@ hg_graph_t * hg_read_graph(const string filename) {
       (*g)[i].theta = angular;
     }
     // reading links
+    unsigned int starting_id = (*g)[boost::graph_bundle].starting_id;
     while(file >> node1 >> node2) {
       add_edge(node1-starting_id, node2-starting_id, *g);
     }
@@ -79,20 +80,20 @@ hg_graph_t * hg_read_graph(const string filename) {
   }
   file.close();
   // infer graph type from parameters 
-  (*g)[boost::graph_bundle].type  = hg_infer_hg_type(g);
+  (*g)[boost::graph_bundle].type = hg_infer_hg_type(g);
   return g; 
 }
 
 
 
-void hg_print_graph(const hg_graph_t *g, const string filename, unsigned int starting_id) {
+void hg_print_graph(const hg_graph_t *g, const string filename) {
 
   if(g == NULL) {
     hg_log_err("Warning: empty data structure, no file written");
     return;
   }
   ofstream file;
- 
+
   file.open(filename.c_str(), ios::out);
   if(!file.fail() and file.is_open()) {
     file << std::setprecision(10) << std::fixed;
@@ -109,8 +110,9 @@ void hg_print_graph(const hg_graph_t *g, const string filename, unsigned int sta
       file << "Z" << "\t" << (*g)[boost::graph_bundle].zeta_eta << "\t";
     }
     file << "S" << "\t" << (*g)[boost::graph_bundle].seed << "\t";
-    file << "I" << "\t" << starting_id << endl;
+    file << "I" << "\t" << (*g)[boost::graph_bundle].starting_id << endl;
     // hg_graph vertex coordinates
+    unsigned int starting_id = (*g)[boost::graph_bundle].starting_id;
     hg_graph_t::vertex_iterator vertexIt, vertexEnd;
     boost::tie(vertexIt, vertexEnd) = vertices(*g);
     for (; vertexIt != vertexEnd; ++vertexIt) { 
