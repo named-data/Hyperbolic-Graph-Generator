@@ -95,7 +95,7 @@ AC_FUNC_REALLOC
 # Checks for header files.
 AC_CHECK_HEADERS([math.h stdlib.h string.h time.h sys/time.h])
 AC_CHECK_HEADERS([boost/graph/adjacency_list.hpp], , [AC_MSG_ERROR( [boost libraries not found, please see README])] )
-AX_BOOST_BASE([1.52.0],, [AC_MSG_ERROR( [boost libraries 1.52 or higher required, please see README])])
+AX_BOOST_BASE([1.46.1],, [AC_MSG_ERROR( [boost libraries 1.46.1 or higher required, please see README])])
 
 AC_CHECK_HEADERS([gsl/gsl_math.h], , [AC_MSG_ERROR( [gsl libraries not found, please see README])] )
 
