@@ -2,7 +2,7 @@
 1.0.3:
 	Fixed node id bug in graph_properties
 	Added configure check that verifies user
-	is using boost 1.52.0 or higher
+	is using boost 1.46.1 or higher
 
 1.0.2:
 	Minor bugfixes.
