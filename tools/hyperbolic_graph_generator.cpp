@@ -258,9 +258,11 @@ int main (int argc, char **argv) {
     return 1;
   }
 
+  int ret = 0;
   // if the number of edges is 0, then no graph has been constructed
   if(num_edges(*graph) == 0) {
     hg_enduser_warning( "All nodes have zero degree (no edges in the graph)");
+    ret = 1;
   }
   else{
     if(verbose) {
@@ -278,5 +280,5 @@ int main (int argc, char **argv) {
 
   hg_debug("graph generator end");
 
-  return 0;
+  return ret;
 }

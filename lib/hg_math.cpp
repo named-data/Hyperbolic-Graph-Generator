@@ -189,7 +189,7 @@ double hg_get_R(hg_graph_t * graph, hg_algorithm_parameters_t & p){
   if(isnan(res) || abs(n*res-k_bar) > eps 
      || high < std::numeric_limits< double >::min()){
     cerr << "Network cannot be generated. Try different parameters." << endl;
-    exit(0);
+    exit(1);
   }
 
 

@@ -58,8 +58,7 @@ hg_graph_t * hg_read_graph(const string filename);
  * see the README file for more details on
  * the hg format
  */
-void hg_print_graph(const hg_graph_t *g, const string filename, 
-		    unsigned int starting_id = 1);
+void hg_print_graph(const hg_graph_t *g, const string filename);
 
 
 //  =============  Random generator functions  ============= 
