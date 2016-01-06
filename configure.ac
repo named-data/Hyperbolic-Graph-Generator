@@ -40,11 +40,10 @@ AC_DEFINE_UNQUOTED([HYPERBOLIC_GRAPH_GENERATOR_MINOR_VERSION],$HYPERBOLIC_GRAPH_
 	[Hyperbolic_Graph_Generator minor version])
 
 LT_INIT
-
+AC_CONFIG_AUX_DIR([m4])
 AM_INIT_AUTOMAKE
 
 AC_CONFIG_MACRO_DIR([m4])
-
 AC_CONFIG_SRCDIR([lib/hg_graphs_lib.cpp])
 AC_CONFIG_HEADERS([config.h])
 
@@ -96,6 +95,8 @@ AC_FUNC_REALLOC
 # Checks for header files.
 AC_CHECK_HEADERS([math.h stdlib.h string.h time.h sys/time.h])
 AC_CHECK_HEADERS([boost/graph/adjacency_list.hpp], , [AC_MSG_ERROR( [boost libraries not found, please see README])] )
+AX_BOOST_BASE([1.52.0],, [AC_MSG_ERROR( [boost libraries 1.52 or higher required, please see README])])
+
 AC_CHECK_HEADERS([gsl/gsl_math.h], , [AC_MSG_ERROR( [gsl libraries not found, please see README])] )
 
 
